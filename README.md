@@ -27,6 +27,7 @@ root                    (project root folder)
 
 ## Required Technologies
 * Python 3.8.0
+* Raylib Python CFFI 3.7
 
 ## Author
 * Andrew Swayze (swa13003@byui.edu)
