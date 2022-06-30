@@ -3,17 +3,17 @@
 import os
 import random
 
-from game.casting.actor import Actor
-from game.casting.artifact import Artifact
-from game.casting.cast import Cast
+from casting.actor import Actor
+from casting.artifact import Artifact
+from casting.cast import Cast
 
-from game.directing.director import Director
+from directing.director import Director
 
-from game.services.keyboard_service import KeyboardService
-from game.services.video_service import VideoService
+from services.keyboard_service import KeyboardService
+from services.video_service import VideoService
 
-from game.shared.color import Color
-from game.shared.point import Point
+from shared.color import Color
+from shared.point import Point
 
 
 FRAME_RATE = 12
@@ -23,10 +23,10 @@ CELL_SIZE = 15
 FONT_SIZE = 15
 COLS = 60
 ROWS = 40
-CAPTION = "Robot Finds Kitten"
-DATA_PATH = os.path.dirname(os.path.abspath(__file__)) + "/data/messages.txt"
+CAPTION = "Greed"
+DATA_PATH = os.path.dirname(os.path.abspath(__file__)) + "\data\messages.txt"
 WHITE = Color(255, 255, 255)
-DEFAULT_ARTIFACTS = 40
+DEFAULT_ARTIFACTS = 10
 
 
 def main():
@@ -55,16 +55,11 @@ def main():
     cast.add_actor("robots", robot)
     
     # create the artifacts
-    with open(DATA_PATH) as file:
-        data = file.read()
-        messages = data.splitlines()
-
     for n in range(DEFAULT_ARTIFACTS):
         text = chr(random.choice([42, 111]))
-        message = messages[n]
 
         x = random.randint(1, COLS - 1)
-        y = random.randint(1, ROWS - 1)
+        y = 0
         position = Point(x, y)
         position = position.scale(CELL_SIZE)
 
@@ -78,7 +73,7 @@ def main():
         artifact.set_font_size(FONT_SIZE)
         artifact.set_color(color)
         artifact.set_position(position)
-        artifact.set_message(message)
+        artifact.set_value(text)
         cast.add_actor("artifacts", artifact)
     
     # start the game
