@@ -30,5 +30,5 @@ root                    (project root folder)
 
 ## Author
 * Andrew Swayze (swa13003@byui.edu)
-* 
-* 
+* Daniel Loran ()
+* Kouadio Ange Konan ()
