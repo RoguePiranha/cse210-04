@@ -74,6 +74,7 @@ def main():
         artifact.set_color(color)
         artifact.set_position(position)
         artifact.set_value(text)
+        artifact.set_velocity(10)
         cast.add_actor("artifacts", artifact)
     
     # start the game

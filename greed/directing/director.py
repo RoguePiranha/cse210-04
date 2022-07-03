@@ -1,3 +1,5 @@
+
+
 class Director:
     """A person who directs the game. 
     
@@ -55,8 +57,9 @@ class Director:
         max_x = self._video_service.get_width()
         max_y = self._video_service.get_height()
         robot.move_next(max_x, max_y)
+        artifacts.move_next(max_x, max_y) #FIGURE OUT HOW TO DO THIS
         
-        for artifact in artifacts:
+        for artifact in artifacts: #USE THIS TO SET THE POINTS
             if robot.get_position().equals(artifact.get_position()):
                 message = artifact.get_message()
                 banner.set_text(message)    
