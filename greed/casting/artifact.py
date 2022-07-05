@@ -14,32 +14,16 @@ class Artifact(Actor):
     def __init__(self):
         super().__init__()
         self._message = ""
-        
-    def set_value(self, text):
-        if text == "*":
-            value = 1
-            return value
-        elif text == "o":
-            value = -1
-            return value
+        self._value = 0
 
-    # def set_velocity(self, velocity):
-    #     """Updates the velocity to the given one.
-        
-    #     Args:
-    #         velocity (Point): The given velocity.
-    #     """
-    #     self._velocity = velocity
+    def set_value(self):
+        if self._text == "*":
+            self._value = 1
 
-    # def move_next(self, max_x, max_y):
-    #     """Moves the actor to its next position according to its velocity. Will wrap the position 
-    #     from one side of the screen to the other when it reaches the given maximum x and y values.
+
+        elif self._text == "o":
+            self._value = -1
+
+    def get_value(self):
         
-    #     Args:
-    #         max_x (int): The maximum x value.
-    #         max_y (int): The maximum y value.
-    #     """
-    #     x = (self._position.get_x() + self._velocity.get_x()) % max_x
-    #     y = (self._position.get_y() + self._velocity.get_y()) % max_y
-    #     self._position = Point(x, y)
-    
+        return self._value

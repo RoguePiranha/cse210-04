@@ -1,4 +1,4 @@
-
+from shared.point import Point
 
 class Director:
     """A person who directs the game. 
@@ -19,6 +19,9 @@ class Director:
         """
         self._keyboard_service = keyboard_service
         self._video_service = video_service
+        self._loseGame = False
+        self._score = 0
+
         
     def start_game(self, cast):
         """Starts the game using the given cast. Runs the main game loop.
@@ -27,7 +30,7 @@ class Director:
             cast (Cast): The cast of actors.
         """
         self._video_service.open_window()
-        while self._video_service.is_window_open():
+        while self._video_service.is_window_open() and self._loseGame == False:
             self._get_inputs(cast)
             self._do_updates(cast)
             self._do_outputs(cast)
@@ -53,16 +56,22 @@ class Director:
         robot = cast.get_first_actor("robots")
         artifacts = cast.get_actors("artifacts")
 
-        banner.set_text("")
+        banner.set_text(f"Score: {self._score}")
         max_x = self._video_service.get_width()
         max_y = self._video_service.get_height()
         robot.move_next(max_x, max_y)
-        artifacts.move_next(max_x, max_y) #FIGURE OUT HOW TO DO THIS
+
+        x1 = 0
+        y1 = 1
+        velocity = Point(x1, y1)
+        
         
         for artifact in artifacts: #USE THIS TO SET THE POINTS
+            artifact.set_velocity(velocity)
+            artifact.move_next(max_x,max_y)
             if robot.get_position().equals(artifact.get_position()):
-                message = artifact.get_message()
-                banner.set_text(message)    
+                self._score += artifact.get_value()
+                cast.remove_actor("artifacts", artifact)
         
     def _do_outputs(self, cast):
         """Draws the actors on the screen.

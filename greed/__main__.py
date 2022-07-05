@@ -58,6 +58,7 @@ def main():
     for n in range(DEFAULT_ARTIFACTS):
         text = chr(random.choice([42, 111]))
 
+        # start positions for the artifacts
         x = random.randint(1, COLS - 1)
         y = 0
         position = Point(x, y)
@@ -72,9 +73,9 @@ def main():
         artifact.set_text(text)
         artifact.set_font_size(FONT_SIZE)
         artifact.set_color(color)
+        artifact.set_value()
+        artifact.set_velocity(Point(0, 3))
         artifact.set_position(position)
-        artifact.set_value(text)
-        artifact.set_velocity(10)
         cast.add_actor("artifacts", artifact)
     
     # start the game
