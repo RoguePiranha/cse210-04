@@ -1,4 +1,6 @@
 from shared.point import Point
+from time import sleep
+from casting.create_gems import new_gems
 
 class Director:
     """A person who directs the game. 
@@ -30,7 +32,7 @@ class Director:
             cast (Cast): The cast of actors.
         """
         self._video_service.open_window()
-        while self._video_service.is_window_open() and self._loseGame == False:
+        while self._video_service.is_window_open():
             self._get_inputs(cast)
             self._do_updates(cast)
             self._do_outputs(cast)
@@ -69,9 +71,17 @@ class Director:
         for artifact in artifacts: #USE THIS TO SET THE POINTS
             artifact.set_velocity(velocity)
             artifact.move_next(max_x,max_y)
+
             if robot.get_position().equals(artifact.get_position()):
                 self._score += artifact.get_value()
                 cast.remove_actor("artifacts", artifact)
+
+            if artifact.get_position().get_y() > max_y:
+                cast.remove_actor("artifacts", artifact)
+
+            # create new artifacts if there are not enough
+            if artifact.get_position().get_y() > 1:
+                cast.add_actor("artifacts", artifact)
         
     def _do_outputs(self, cast):
         """Draws the actors on the screen.
