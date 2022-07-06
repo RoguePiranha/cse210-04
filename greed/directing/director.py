@@ -80,8 +80,9 @@ class Director:
                 cast.remove_actor("artifacts", artifact)
 
             # create new artifacts if there are not enough
-            if artifact.get_position().get_y() > 1:
+            if artifact.get_position().get_y() = 2:
                 cast.add_actor("artifacts", artifact)
+                cast.create_gems()
         
     def _do_outputs(self, cast):
         """Draws the actors on the screen.
